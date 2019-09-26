@@ -1,0 +1,37 @@
+#server:
+#    port: 9001
+#spring:
+#    application:
+#        name: eureka-server
+#    profiles:
+#        active: 127.0.0.1
+#eureka:
+#    instance:
+#        hostname: eureka01   # eureka 实例名称
+#        instance: ${eureka.instance.hostname}:${server.port}
+#    client:
+#        register-with-eureka: false # 不向注册中心注册自己
+#        fetch-registry: false       # 是否检索服务
+#        service-url:
+#            defaultZone: http://127.0.0.1:9002/eureka/  # 注册中心访问地址
+server:
+    port: 9005
+spring:
+    application:
+        name: eureka-server
+    profiles:
+        active: eureka02
+eureka:
+    instance:
+        hostname: eureka01   # eureka 实例名称
+        instance-id: ${eureka.instance.hostname}:${server.port}
+    client:
+        register-with-eureka: true # false不向注册中心注册自己
+        #        fetch-registry: false       # 是否检索服务
+        service-url:
+            defaultZone: http://localhost:9005/eureka/  # 注册中心访问地址
+
+    server:
+        # 默认是true，调整为false，关闭eureka的自我保护
+        enable-self-preservation: false
+        eviction-interval-timer-in-ms: 3000 #毫秒
